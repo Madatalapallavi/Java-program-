@@ -1,0 +1,64 @@
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class BusTicketBookingSystems extends JFrame {
+    private JTextField nameField, sourceField, destinationField;
+    private JButton bookButton;
+
+    public BusTicketBookingSystem() {
+        // Set up the JFrame
+        setTitle("Bus Ticket Booking System");
+        setSize(400, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+
+        // Create components
+        nameField = new JTextField(20);
+        sourceField = new JTextField(20);
+        destinationField = new JTextField(20);
+        bookButton = new JButton("Book Ticket");
+
+        // Add components to the JFrame
+        add(new JLabel("Name: "));
+        add(nameField);
+        add(new JLabel("Source: "));
+        add(sourceField);
+        add(new JLabel("Destination: "));
+        add(destinationField);
+        add(bookButton);
+
+        // Add action listener to the bookButton
+        bookButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                bookTicket();
+            }
+        });
+    }
+
+    private void bookTicket() {
+        String name = nameField.getText();
+        String source = sourceField.getText();
+        String destination = destinationField.getText();
+
+        // Perform backend logic (e.g., validate inputs, save to database, etc.)
+        // For simplicity, let's just display a message in this example
+        String message = "Ticket booked for:\nName: " + name + "\nSource: " + source + "\nDestination: " + destination;
+        JOptionPane.showMessageDialog(this, message, "Booking Confirmation", JOptionPane.INFORMATION_MESSAGE);
+
+        // Clear input fields after booking
+        nameField.setText("");
+        sourceField.setText("");
+        destinationField.setText("");
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new BusTicketBookingSystem().setVisible(true);
+            }
+        });
+    }
+}
